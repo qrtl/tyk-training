@@ -16,16 +16,6 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from openerp.osv import fields, osv
-
-class stock_picking(osv.osv):
-    _inherit = "stock.picking"
-
-    _columns = {
-        'sale_ord
-        'project_id': fields.related('sale_order_id', 'project_id', string="Contract / Analytic", type='many2one', relation='account.analytic.account'),
-    }
-
-    def 
+import models
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

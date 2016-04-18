@@ -16,20 +16,19 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from openerp.osv import fields, osv
+from openerp import models, fields, api
 
-class stock_picking(osv.osv):
+class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    def _get_sale_order(self, cr, uid, ids, name, arg, context=None):
-        res = {}
-        for picking in self.browse(cr, uid, ids, context=context):
-            res[picking.id] = self.pool.get('sale.order').search(cr, uid, [('name', '=', picking.origin)], limit=1)[0]
-        return res
+    @api.multi
+    @api.depends('origin')
+    def _get_sale_order(self):
+        for pick in self:
+            pick.sale_order_id = 0
+            pick.sale_order_id = self.env['sale.order'].search([('name', '=', pick.origin)], limit=1)
 
-    _columns = {
-        'sale_order_id': fields.function(_get_sale_order, string="Sale Order", type='many2one', relation='sale.order', readonly=True),
-        'project_id': fields.related('sale_order_id', 'project_id', string="Contract / Analytic", type='many2one', relation='account.analytic.account'),
-    }
+    sale_order_id = fields.Many2one('sale.order', compute='_get_sale_order', string="Sale Order", readonly=True)
+    project_id = fields.Many2one('account.analytic.account', related='sale_order_id.project_id', string="Contract / Analytic", store=True)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -16,20 +16,6 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from openerp.osv import fields, osv
-
-class stock_picking(osv.osv):
-    _inherit = "stock.picking"
-
-    def _get_sale_order(self, cr, uid, ids, name, arg, context=None):
-        res = {}
-        for picking in self.browse(cr, uid, ids, context=context):
-            res[picking.id] = self.pool.get('sale.order').search(cr, uid, [('name', '=', picking.origin)], limit=1)[0]
-        return res
-
-    _columns = {
-        'sale_order_id': fields.function(_get_sale_order, string="Sale Order", type='many2one', relation='sale.order', readonly=True),
-        'project_id': fields.related('sale_order_id', 'project_id', string="Contract / Analytic", type='many2one', relation='account.analytic.account'),
-    }
+import stock
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
