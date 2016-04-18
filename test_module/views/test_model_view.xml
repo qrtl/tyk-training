@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <menuitem name="Test Main Menu"
+        id="menu_test_main"
+        parent="mail.mail_feeds_main"
+        groups="base.group_user"
+        sequence="20"
+    />
+
+    <menuitem name="Test Sub Menu"
+        id="menu_test_sub"
+        parent="menu_test_main"
+        groups="base.group_user"
+        sequence="1"
+    />
+
+        <record id="act_test_model" model="ir.actions.act_window">
+            <field name="name">Test Action</field>
+            <field name="res_model">test.model</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="view_test_model_tree" model="ir.ui.view">
+            <field name="name">test.model.tree</field>
+            <field name="model">test.model</field>
+            <field name="arch" type="xml">
+                <tree string="Test Tree View">
+                    <field name="test_char"/>
+                    <field name="test_boolean"/>
+                    <field name="test_selection"/>
+                    <field name="test_integer"/>
+                    <field name="test_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_test_model_form" model="ir.ui.view">
+            <field name="name">test.model.form</field>
+            <field name="model">test.model</field>
+            <field name="arch" type="xml">
+                <form string="Test Form View">
+                <sheet string="Test Sheet">
+                    <h1>
+                        <label string="Test Name"/>
+                        <field name="test_char"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="test_selection"/>
+                            <field name="test_integer"/>
+                        </group>
+                        <group>
+                            <field name="test_date"/>
+                            <field name="test_boolean"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Test Page">
+                            <group string="Test Text">
+                                <field name="test_text"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
