@@ -27,7 +27,7 @@
     "application": False,
     "installable": True,
     "depends": [
-        "project",
+        "sale_service",
     ],
     "data": [
         "views/project_report.xml",
