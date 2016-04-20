@@ -18,8 +18,11 @@
             <field name="model">sale.order.line</field>
             <field name="inherit_id" ref="sale.view_sales_order_line_filter"/>
             <field name="arch" type="xml">
+                <xpath expr="//filter[@string='My Sales Order Lines']" position="after">
+                    <filter string="Not Draft" name="not_draft" domain="[('state','&lt;&gt;','draft')]"/>
+                </xpath>
                 <xpath expr="//group[@string='Group By']/filter[@string='Product']" position="after">
-                         <filter string="Partner" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'partner_id'}"/>
+                    <filter string="Partner" domain="[]" context="{'group_by':'order_partner_id'}"/>
                 </xpath>
             </field>
         </record>
@@ -28,11 +31,11 @@
             <field name="name">Sales Order Lines</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">sale.order.line</field>
-            <field name="view_type">tree</field>
+            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-<!--            <field name="view_id" ref="view_order_line_tree_unit"/>-->
+            <field name="view_id" ref="view_order_line_tree_unit"/>
             <field name="search_view_id" ref="view_sales_order_line_filter_partner"/>
-            <field name="domain">[('state','&lt;&gt;','draft')]</field>
+            <field name="context">{'search_default_not_draft':1}</field>
         </record>
 
         <menuitem id="menu_sale_order_line"
