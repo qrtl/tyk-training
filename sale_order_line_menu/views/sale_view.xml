@@ -18,10 +18,11 @@
             <field name="model">sale.order.line</field>
             <field name="inherit_id" ref="sale.view_sales_order_line_filter"/>
             <field name="arch" type="xml">
-                <xpath expr="//filter[@string='My Sales Order Lines']" position="after">
+                <xpath expr="//field[@name='order_id']" position="before">
+                    <separator/>
                     <filter string="Not Draft" name="not_draft" domain="[('state','&lt;&gt;','draft')]"/>
                 </xpath>
-                <xpath expr="//group[@string='Group By']/filter[@string='Product']" position="after">
+                <xpath expr="//group" position="inside">
                     <filter string="Partner" domain="[]" context="{'group_by':'order_partner_id'}"/>
                 </xpath>
             </field>

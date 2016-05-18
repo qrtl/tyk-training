@@ -17,9 +17,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 {
-    "name": "Sale Order Line Manu",
+    "name": "Sale Order Line Menu",
     "summary": "add menu for sale order line",
-    "version": "8.0.1.0.0",
+    "version": "9.0.1.0.0",
     "category": "Sales",
     "website": "https://www.odoo-asia.com/",
     "author": "Rooms For (Hong Kong) Limited T/A OSCG",

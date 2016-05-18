@@ -122,7 +122,7 @@
             <field name="view_id" ref="view_site_form_z160420a"/>
             <field name="act_window_id" ref="project_site_action"/>
         </record>
-        <menuitem action="project_site_action" id="menu_project_site_act" parent="base.menu_definitions" groups="base.group_no_one"/>
+        <menuitem action="project_site_action" id="menu_project_site_act" parent="project.menu_project_config" groups="base.group_no_one"/>
 
     </data>
 </openerp>
